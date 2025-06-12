@@ -5,7 +5,7 @@
 # Link to a page that gives an overview of all your projects.
 # This can be an external link (e.g., to you GitHub profile) or to another
 # page within your website.
-projects_url: http://github.com/probberechts
+projects_url: https://github.com/ApexGust
 
 # Set the page direction to RTL or LTR. default is LTR. (if you set it 'rtl', the 'vazir' font will be loaded.)
 direction: ltr
@@ -15,9 +15,9 @@ direction: ltr
 # languages/*.yml
 nav:
   home: /
-  about: /about/
   articles: /archives/
-  projects: http://github.com/probberechts
+  about: /about/
+  projects: https://github.com/ApexGust
 
 
 # Links to your social media accounts.
@@ -29,7 +29,7 @@ nav:
 social_links:
   -
     icon: github
-    link: https://github.com/pythonpray
+    link: https://github.com/ApexGust
 #  -
 #    icon: twitter
 #    link: /
@@ -208,6 +208,9 @@ umami_analytics:
 gravatar:
   email: name@email.com
   hash: d41d8cd98f00b204e9800998ecf8427e
+
+busuanzi:
+  enable: true
 
 # loads libraries and styles from CDN instead or relying on local files
 cdn:

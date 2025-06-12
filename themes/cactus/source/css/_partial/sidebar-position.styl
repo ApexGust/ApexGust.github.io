@@ -1,0 +1,54 @@
+/* 侧边栏位置控制 */
+.with-sidebar {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  
+  /* 当侧边栏在左侧时的样式 */
+  &.sidebar-left {
+    .main-content {
+      order: 2;
+      flex: 1;
+    }
+    
+    .sidebar {
+      order: 1;
+      --sidebar-position: left;
+      --sidebar-margin-right: 20px;
+      --sidebar-margin-left: 0;
+      margin-right: 20px !important;
+      margin-left: 0 !important;
+    }
+  }
+  
+  /* 当侧边栏在右侧时的样式 */
+  &.sidebar-right {
+    .main-content {
+      order: 1;
+      flex: 1;
+    }
+    
+    .sidebar {
+      order: 2;
+      --sidebar-position: right;
+      --sidebar-margin-right: 0;
+      --sidebar-margin-left: 20px;
+      margin-right: 0;
+      margin-left: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    
+    .main-content, .sidebar {
+      order: initial;
+      width: 100%;
+    }
+    
+    .sidebar {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}

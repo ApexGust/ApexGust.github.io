@@ -1,0 +1,116 @@
+<!-- 侧边栏组件 -->
+<section id="sidebar" class="sidebar">
+  <div class="sidebar-container">
+    <!-- 站点信息 -->
+    <div class="sidebar-item site-info">
+      <h3>站点信息</h3>
+      <div class="site-stats">
+        <% if (theme.sidebar && theme.sidebar.site_stats && theme.umami_analytics.enabled) { %>
+          <div class="stat-item">
+            <i class="fa fa-user"></i>
+            <span id="umami-visitors">加载中...</span> 访客数
+          </div>
+          <div class="stat-item">
+            <i class="fa fa-eye"></i>
+            <span id="umami-pageviews">加载中...</span> 访问量
+          </div>
+        <% } else if (theme.sidebar && theme.sidebar.site_stats && theme.google_analytics.enabled) { %>
+          <div class="stat-item">
+            <i class="fa fa-user"></i>
+            <span id="ga-visitors">加载中...</span> 访客数
+          </div>
+          <div class="stat-item">
+            <i class="fa fa-eye"></i>
+            <span id="ga-pageviews">加载中...</span> 访问量
+          </div>
+        <% } else { %>
+          <div class="stat-item">
+            <i class="fa fa-calendar"></i>
+            <span>博客已运行 <span id="site-runtime">0</span> 天</span>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="sidebar-item recent-posts">
+      <h3>最新文章</h3>
+      <ul>
+        <% site.posts.sort('date', -1).limit(5).each(function(post){ %>
+          <li>
+            <a href="<%- url_for(post.path) %>"><%= post.title || '(no title)' %></a>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <!-- 标签云 -->
+    <% if (site.tags.length) { %>
+    <div class="sidebar-item tag-cloud">
+      <h3>标签云</h3>
+      <div class="tag-list">
+        <%- tagcloud({min_font: 12, max_font: 24, amount: 20, color: true, start_color: '#A4A4A4', end_color: '#036AAB'}) %>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- 社交链接 -->
+    <div class="sidebar-item social-links">
+      <h3>社交链接</h3>
+      <div class="social-list">
+        <% for (var i in theme.social_links) { %>
+          <% var link = theme.social_links[i]; %>
+          <a href="<%- url_for(link.link) %>" target="_blank" title="<%= link.label || link.icon %>">
+            <i class="fa fa-<%= link.icon %>"></i>
+          </a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 侧边栏脚本 -->
+<script>
+  // 计算网站运行时间
+  function siteRuntime() {
+    var siteStartDate = new Date("<%= theme.sidebar && theme.sidebar.site_start_date || '2023-01-01' %>");
+    var now = new Date();
+    var diff = now.getTime() - siteStartDate.getTime();
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById('site-runtime').textContent = days;
+  }
+
+  // 获取Umami统计数据
+  function getUmamiStats() {
+    if (typeof umami !== 'undefined') {
+      // 这里需要根据Umami API调整
+      // 示例代码，实际实现可能需要根据Umami的API调整
+      setTimeout(function() {
+        document.getElementById('umami-visitors').textContent = '获取中...';
+        document.getElementById('umami-pageviews').textContent = '获取中...';
+      }, 1000);
+    }
+  }
+
+  // 获取Google Analytics统计数据
+  function getGAStats() {
+    if (typeof ga !== 'undefined') {
+      // 这里需要根据GA API调整
+      // 示例代码，实际实现可能需要根据GA的API调整
+      setTimeout(function() {
+        document.getElementById('ga-visitors').textContent = '获取中...';
+        document.getElementById('ga-pageviews').textContent = '获取中...';
+      }, 1000);
+    }
+  }
+
+  // 页面加载完成后执行
+  window.addEventListener('load', function() {
+    siteRuntime();
+    <% if (theme.umami_analytics.enabled) { %>
+      getUmamiStats();
+    <% } else if (theme.google_analytics.enabled) { %>
+      getGAStats();
+    <% } %>
+  });
+</script>
