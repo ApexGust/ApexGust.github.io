@@ -8,20 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="前言拥有一个自定义域名并将其指向托管在 GitHub Pages 上的个人博客、项目文档或作品集，是许多开发者和内容创作者的常见需求。GitHub Pages 提供了免费、便捷的静态站点托管服务，而 Cloudflare 则以其强大的 DNS管理、安全防护和 CDN 加速功能著称。将两者结合，无疑能为我们的站点带来更专业的外观和更优越的性能。 然而，在配置过程中，尤其是涉及到 Cloudflare">
 <meta property="og:type" content="article">
-<meta property="og:title" content="将 Cloudflare 域名指向 GitHub Pages 站点">
+<meta property="og:title" content="GitHub Pages站点代理到Cloudflare域名">
 <meta property="og:url" content="http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="绝对直觉">
 <meta property="og:description" content="前言拥有一个自定义域名并将其指向托管在 GitHub Pages 上的个人博客、项目文档或作品集，是许多开发者和内容创作者的常见需求。GitHub Pages 提供了免费、便捷的静态站点托管服务，而 Cloudflare 则以其强大的 DNS管理、安全防护和 CDN 加速功能著称。将两者结合，无疑能为我们的站点带来更专业的外观和更优越的性能。 然而，在配置过程中，尤其是涉及到 Cloudflare">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/Cloudflare_DNS%E9%85%8D%E7%BD%AE/cloudflare_dns_conf.png">
-<meta property="og:image" content="http://example.com/Cloudflare_DNS%E9%85%8D%E7%BD%AE/cloud_dns_1.png">
-<meta property="og:image" content="http://example.com/Cloudflare_DNS%E9%85%8D%E7%BD%AE/github_dns_invalid.png">
-<meta property="og:image" content="http://example.com/Cloudflare_DNS%E9%85%8D%E7%BD%AE/github_dns2.png">
+<meta property="og:image" content="http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/cloudflare_dns_conf.png">
+<meta property="og:image" content="http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/cloud_dns_1.png">
+<meta property="og:image" content="http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/github_dns_invalid.png">
+<meta property="og:image" content="http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/github_dns2.png">
 <meta property="article:published_time" content="2025-06-12T15:17:19.000Z">
-<meta property="article:modified_time" content="2025-06-12T09:50:15.164Z">
+<meta property="article:modified_time" content="2025-06-12T12:21:24.975Z">
 <meta property="article:author" content="pray">
+<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="Cloudflare">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/Cloudflare_DNS%E9%85%8D%E7%BD%AE/cloudflare_dns_conf.png">
+<meta name="twitter:image" content="http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/cloudflare_dns_conf.png">
     
     
       
@@ -41,7 +43,7 @@
       
     
     <!-- title -->
-    <title>将 Cloudflare 域名指向 GitHub Pages 站点</title>
+    <title>GitHub Pages站点代理到Cloudflare域名</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -76,6 +78,8 @@
      --><!--
        --><li><a href="/archives/">Writing</a></li><!--
      --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
        --><li><a target="_blank" rel="noopener" href="https://github.com/ApexGust">Projects</a></li><!--
@@ -101,16 +105,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&text=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&is_video=false&description=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=将 Cloudflare 域名指向 GitHub Pages 站点&body=Check out this article: http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&name=将 Cloudflare 域名指向 GitHub Pages 站点&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&t=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&text=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&is_video=false&description=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GitHub Pages站点代理到Cloudflare域名&body=Check out this article: http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&name=GitHub Pages站点代理到Cloudflare域名&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&t=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -130,7 +134,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        将 Cloudflare 域名指向 GitHub Pages 站点
+        GitHub Pages站点代理到Cloudflare域名
     </h1>
 
 
@@ -149,8 +153,18 @@
 
 
       
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91%E7%A9%B7%E9%AC%BC%E5%A5%97%E9%A4%90/">开发穷鬼套餐</a>
+    </div>
+
 
       
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Cloudflare/" rel="tag">Cloudflare</a>, <a class="p-category" href="/tags/GitHub/" rel="tag">GitHub</a>
+    </div>
+
 
     </div>
   </header>
@@ -174,13 +188,15 @@
 <li><strong>我们的实践：</strong> 我们最初尝试了 <code>zhijue.dpdns.org</code> 作为 Apex，并希望 <code>www.zhijue.dpdns.org</code> 也能工作。后来我们将自定义域名框中的主要域名设置为 <code>www.zhijue.dpdns.org</code>。</li>
 </ul>
 </li>
-<li><strong>点击 “Save” (保存)。</strong><br><img src="/Cloudflare_DNS%E9%85%8D%E7%BD%AE/cloudflare_dns_conf.png" alt="cloudflare的DNS配置"><br>保存后，GitHub Pages 会尝试进行 DNS 检查。此时，你可能会看到一些关于 DNS 配置不正确的提示或警告。不用担心，这是正常的，因为我们还没有在 Cloudflare 中完成配置。GitHub 通常会给出它期望的 DNS 配置建议。</li>
+<li><strong>点击 “Save” (保存)。</strong><img src="/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/cloudflare_dns_conf.png" class="" title="cloudflare的DNS配置"> 
+保存后，GitHub Pages 会尝试进行 DNS 检查。此时，你可能会看到一些关于 DNS 配置不正确的提示或警告。不用担心，这是正常的，因为我们还没有在 Cloudflare 中完成配置。GitHub 通常会给出它期望的 DNS 配置建议。</li>
 </ol>
 <h3 id="步骤二：在-Cloudflare-中配置-DNS-记录"><a href="#步骤二：在-Cloudflare-中配置-DNS-记录" class="headerlink" title="步骤二：在 Cloudflare 中配置 DNS 记录"></a>步骤二：在 Cloudflare 中配置 DNS 记录</h3><p>这是最关键的一步，也是我们花费一些时间排查的地方。</p>
 <ol>
 <li><p><strong>登录 Cloudflare 并选择你的域名。</strong></p>
 </li>
-<li><p><strong>进入 “DNS” 管理页面。</strong><br><img src="/Cloudflare_DNS%E9%85%8D%E7%BD%AE/cloud_dns_1.png" alt="cloudflare的DNS配置"></p>
+<li><p><strong>进入 “DNS” 管理页面。</strong></p>
+<img src="/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/cloud_dns_1.png" class="" title="cloudflare的DNS配置">
 </li>
 <li><p><strong>添加或修改 DNS 记录：</strong></p>
 <ul>
@@ -225,14 +241,17 @@
 <li><p><strong>等待 DNS 传播：</strong> DNS 更改需要一些时间才能在全球生效。通常几分钟到一小时不等。你可以使用 <code>whatsmydns.net</code> 等工具检查你的域名是否已经正确指向了你的 <code>your-github-username.github.io</code> (对于 CNAME) 或 GitHub Pages 的 IP 地址 (对于 A 记录)。</p>
 </li>
 <li><p><strong>返回 GitHub Pages 设置页面：</strong> 点击警告信息旁边的 <strong>“Check again”</strong> 按钮。</p>
-<p><img src="/Cloudflare_DNS%E9%85%8D%E7%BD%AE/github_dns_invalid.png" alt="github pages的配置"><br>此时，如果 DNS 配置正确被 GitHub 识别，警告信息应该会消失。在我们的案例中，最初是 <code>www.zhijue.dpdns.org</code> 有警告，后来是 Apex 域名 <code>zhijue.dpdns.org</code> 报 “NotServedByPagesError”。通过确保 Apex 域名的 DNS 记录也正确添加并设置为 “仅 DNS” 后，问题得到了解决。</p>
+<img src="/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/github_dns_invalid.png" class="" title="github pages的配置">
+<p>此时，如果 DNS 配置正确被 GitHub 识别，警告信息应该会消失。在我们的案例中，最初是 <code>www.zhijue.dpdns.org</code> 有警告，后来是 Apex 域名 <code>zhijue.dpdns.org</code> 报 “NotServedByPagesError”。通过确保 Apex 域名的 DNS 记录也正确添加并设置为 “仅 DNS” 后，问题得到了解决。</p>
 </li>
 </ol>
 <h3 id="步骤四：启用-HTTPS"><a href="#步骤四：启用-HTTPS" class="headerlink" title="步骤四：启用 HTTPS"></a>步骤四：启用 HTTPS</h3><p>一旦 GitHub Pages 成功验证了你的 DNS 记录，”Enforce HTTPS” 选项通常就会变为可用。</p>
 <ol>
 <li>在 GitHub Pages 设置页面，<strong>勾选 “Enforce HTTPS”</strong> 并保存。</li>
-<li>GitHub 会开始为你的自定义域名颁发 SSL 证书。这个过程可能需要一些时间（几分钟到几小时）。完成后，你的站点就能够通过 HTTPS 安全访问了。<br><img src="/Cloudflare_DNS%E9%85%8D%E7%BD%AE/github_dns2.png" alt="github pages的配置"></li>
+<li>GitHub 会开始为你的自定义域名颁发 SSL 证书。这个过程可能需要一些时间（几分钟到几小时）。完成后，你的站点就能够通过 HTTPS 安全访问了。</li>
 </ol>
+<img src="/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/github_dns2.png" class="" title="github pages的配置"> 
+
 <h3 id="步骤五：重新开启-Cloudflare-代理"><a href="#步骤五：重新开启-Cloudflare-代理" class="headerlink" title="步骤五：重新开启 Cloudflare 代理"></a>步骤五：重新开启 Cloudflare 代理</h3><p>在 GitHub Pages 成功颁发 SSL 证书并且 HTTPS 正常工作后，你可以回到 Cloudflare 的 DNS 设置页面：</p>
 <ol>
 <li>将之前设置为 “仅 DNS” 的记录（针对 <code>www</code> 和 <code>@</code>）的 <strong>“代理状态” 改回 “已代理” (Proxied - 橙色云朵)</strong>。</li>
@@ -270,6 +289,8 @@
         
           <li><a href="/archives/">Writing</a></li>
         
+          <li><a href="/categories/">categories</a></li>
+        
           <li><a href="/about/">About</a></li>
         
           <li><a target="_blank" rel="noopener" href="https://github.com/ApexGust">Projects</a></li>
@@ -287,16 +308,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&text=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&is_video=false&description=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=将 Cloudflare 域名指向 GitHub Pages 站点&body=Check out this article: http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&name=将 Cloudflare 域名指向 GitHub Pages 站点&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&t=将 Cloudflare 域名指向 GitHub Pages 站点"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&text=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&is_video=false&description=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GitHub Pages站点代理到Cloudflare域名&body=Check out this article: http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&title=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&name=GitHub Pages站点代理到Cloudflare域名&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/12/Cloudflare_DNS%E9%85%8D%E7%BD%AE/&t=GitHub Pages站点代理到Cloudflare域名"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -329,6 +350,8 @@
        --><li><a href="/">Home</a></li><!--
      --><!--
        --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
