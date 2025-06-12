@@ -1,0 +1,50 @@
+# .github/workflows/deploy-hexo.yml
+name: Deploy Hexo Blog to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # 或者你的主分支名称，如 master
+  # 允许你从 Actions 标签页手动触发此工作流程
+  workflow_dispatch:
+
+# 为 GITHUB_TOKEN 设置权限以允许部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 只允许一个并发部署，跳过在进行中的运行和最新排队运行之间的排队运行。
+# 但是，不要取消进行中的运行，因为我们希望允许这些生产部署完成。
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy: # 可以将 job ID 改为 build-and-deploy 以保持一致性
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 确保这是你项目兼容的 Node.js 版本
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Static Site
+        run: npx hexo generate # 或者 npm run build (如果你在 package.json 中定义了 build 脚本)
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public # Hexo 默认的输出目录
+          # 可选：如果你想指定提交信息
+          # commit_message: ${{ github.event.head_commit.message }}
+          # 可选：如果 gh-pages 分支需要 CNAME 文件
+          # cname: your.custom.domain.com
