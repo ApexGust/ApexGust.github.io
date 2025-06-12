@@ -1,6 +1,8 @@
 ---
 date: 2025-06-12 15:17:19
-title: 将 Cloudflare 域名指向 GitHub Pages 站点
+title: GitHub Pages站点代理到Cloudflare域名
+tags: [GitHub, Cloudflare]
+categories: [开发穷鬼套餐]
 ---
 
 ## 前言
@@ -29,7 +31,7 @@ title: 将 Cloudflare 域名指向 GitHub Pages 站点
     *   如果你希望使用 Apex 域名（也称为根域名或裸域名），例如 `yourdomain.com`，就输入它。
     *   **我们的实践：** 我们最初尝试了 `zhijue.dpdns.org` 作为 Apex，并希望 `www.zhijue.dpdns.org` 也能工作。后来我们将自定义域名框中的主要域名设置为 `www.zhijue.dpdns.org`。
 3.  **点击 "Save" (保存)。**
-    ![cloudflare的DNS配置](Cloudflare_DNS配置/cloudflare_dns_conf.png)
+    {% asset_img cloudflare_dns_conf.png cloudflare的DNS配置 %} 
     保存后，GitHub Pages 会尝试进行 DNS 检查。此时，你可能会看到一些关于 DNS 配置不正确的提示或警告。不用担心，这是正常的，因为我们还没有在 Cloudflare 中完成配置。GitHub 通常会给出它期望的 DNS 配置建议。
 
 ### 步骤二：在 Cloudflare 中配置 DNS 记录
@@ -38,7 +40,7 @@ title: 将 Cloudflare 域名指向 GitHub Pages 站点
 
 1.  **登录 Cloudflare 并选择你的域名。**
 2.  **进入 "DNS" 管理页面。**
-    ![cloudflare的DNS配置](Cloudflare_DNS配置/cloud_dns_1.png)
+    {% asset_img cloud_dns_1.png cloudflare的DNS配置 %}
 
 3.  **添加或修改 DNS 记录：**
 
@@ -77,7 +79,7 @@ title: 将 Cloudflare 域名指向 GitHub Pages 站点
 2.  **等待 DNS 传播：** DNS 更改需要一些时间才能在全球生效。通常几分钟到一小时不等。你可以使用 `whatsmydns.net` 等工具检查你的域名是否已经正确指向了你的 `your-github-username.github.io` (对于 CNAME) 或 GitHub Pages 的 IP 地址 (对于 A 记录)。
 3.  **返回 GitHub Pages 设置页面：** 点击警告信息旁边的 **"Check again"** 按钮。
 
-    ![github pages的配置](Cloudflare_DNS配置/github_dns_invalid.png)
+    {% asset_img github_dns_invalid.png github pages的配置 %}
     此时，如果 DNS 配置正确被 GitHub 识别，警告信息应该会消失。在我们的案例中，最初是 `www.zhijue.dpdns.org` 有警告，后来是 Apex 域名 `zhijue.dpdns.org` 报 "NotServedByPagesError"。通过确保 Apex 域名的 DNS 记录也正确添加并设置为 "仅 DNS" 后，问题得到了解决。
 
 ### 步骤四：启用 HTTPS
@@ -86,7 +88,7 @@ title: 将 Cloudflare 域名指向 GitHub Pages 站点
 
 1.  在 GitHub Pages 设置页面，**勾选 "Enforce HTTPS"** 并保存。
 2.  GitHub 会开始为你的自定义域名颁发 SSL 证书。这个过程可能需要一些时间（几分钟到几小时）。完成后，你的站点就能够通过 HTTPS 安全访问了。
-![github pages的配置](Cloudflare_DNS配置/github_dns2.png)
+{% asset_img github_dns2.png github pages的配置 %} 
 
 ### 步骤五：重新开启 Cloudflare 代理
 

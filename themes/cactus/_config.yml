@@ -16,6 +16,7 @@ direction: ltr
 nav:
   home: /
   articles: /archives/
+  categories: /categories/
   about: /about/
   projects: https://github.com/ApexGust
 
@@ -107,7 +108,7 @@ logo:
   enabled: true
   width: 50
   height: 50
-  url: /images/logo.png
+  url: /images/avatar.jpg
   gravatar: false
   grayout: true
 
@@ -171,6 +172,14 @@ mathjax:
 disqus:
   enabled: false
   shortname: cactus-1
+
+post_wordcount:
+  item_text: true
+  wordcount: true #单篇文章字数
+  min2read: true #单篇阅读时长
+  totalcount: true #站点总字数
+  separated_meta: true
+
 
 # Fill in your Utterances data to enable Utterances comments
 utterances:
