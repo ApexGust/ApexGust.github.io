@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content=".vege-stat-container * {         margin: 0;         padding: 0;         box-sizing: border-box;     }      .vege-stat-container {         font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe U">
+    <meta name="description" content=".vege-stat-container * {         margin: 0;         padding: 0;         box-sizing: border-box;     }      .vege-stat-container {         font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="蔬菜统计服务 - 在线Excel数据统计工具">
 <meta property="og:url" content="http://example.com/2025/10/27/%E8%94%AC%E8%8F%9C%E7%BB%9F%E8%AE%A1%E6%9C%8D%E5%8A%A1/index.html">
 <meta property="og:site_name" content="绝对直觉">
-<meta property="og:description" content=".vege-stat-container * {         margin: 0;         padding: 0;         box-sizing: border-box;     }      .vege-stat-container {         font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe U">
+<meta property="og:description" content=".vege-stat-container * {         margin: 0;         padding: 0;         box-sizing: border-box;     }      .vege-stat-container {         font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-27T03:15:00.000Z">
-<meta property="article:modified_time" content="2025-10-27T03:17:22.292Z">
+<meta property="article:modified_time" content="2025-10-27T03:26:35.149Z">
 <meta property="article:author" content="pray">
 <meta property="article:tag" content="工具">
 <meta property="article:tag" content="Excel">
@@ -167,7 +167,8 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
     .vege-stat-container * {
         margin: 0;
@@ -467,48 +468,47 @@
         <h1 class="vege-stat-title">🥬 蔬菜统计服务</h1>
         <p class="vege-stat-subtitle">上传Excel文件，自动统计各品名的总重量</p>
 
-<pre><code>    &lt;div class=&quot;error-message&quot; id=&quot;errorMessage&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;success-message&quot; id=&quot;successMessage&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;file-info&quot; id=&quot;fileInfo&quot;&gt;&lt;/div&gt;
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+        <div class="file-info" id="fileInfo"></div>
 
-    &lt;div class=&quot;upload-area&quot; id=&quot;uploadArea&quot;&gt;
-        &lt;div class=&quot;upload-icon&quot;&gt;📊&lt;/div&gt;
-        &lt;div class=&quot;upload-text&quot;&gt;点击或拖拽Excel文件到此处&lt;/div&gt;
-        &lt;div class=&quot;upload-hint&quot;&gt;支持 .xlsx 和 .xls 格式&lt;/div&gt;
-        &lt;input type=&quot;file&quot; id=&quot;fileInput&quot; accept=&quot;.xlsx,.xls&quot;&gt;
-    &lt;/div&gt;
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📊</div>
+            <div class="upload-text">点击或拖拽Excel文件到此处</div>
+            <div class="upload-hint">支持 .xlsx 和 .xls 格式</div>
+            <input type="file" id="fileInput" accept=".xlsx,.xls">
+        </div>
 
-    &lt;div class=&quot;loading&quot; id=&quot;loading&quot;&gt;
-        &lt;div class=&quot;spinner&quot;&gt;&lt;/div&gt;
-        &lt;div&gt;处理中...&lt;/div&gt;
-    &lt;/div&gt;
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div>处理中...</div>
+        </div>
 
-    &lt;div class=&quot;stats-container&quot; id=&quot;statsContainer&quot;&gt;
-        &lt;div class=&quot;stats-header&quot;&gt;
-            &lt;div class=&quot;stats-title&quot;&gt;统计结果&lt;/div&gt;
-            &lt;div class=&quot;stats-header-right&quot;&gt;
-                &lt;div class=&quot;total-info&quot; id=&quot;totalInfo&quot;&gt;&lt;/div&gt;
-                &lt;button class=&quot;copy-btn&quot; id=&quot;copyBtn&quot;&gt;
-                    &lt;span id=&quot;copyIcon&quot;&gt;📋&lt;/span&gt;
-                    &lt;span id=&quot;copyText&quot;&gt;复制结果&lt;/span&gt;
-                &lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;table class=&quot;stats-table&quot;&gt;
-            &lt;thead&gt;
-                &lt;tr&gt;
-                    &lt;th style=&quot;width: 60px;&quot;&gt;序号&lt;/th&gt;
-                    &lt;th&gt;品名&lt;/th&gt;
-                    &lt;th style=&quot;width: 200px;&quot;&gt;总重量&lt;/th&gt;
-                    &lt;th style=&quot;width: 150px;&quot;&gt;记录数&lt;/th&gt;
-                &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody id=&quot;statsBody&quot;&gt;
-            &lt;/tbody&gt;
-        &lt;/table&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+        <div class="stats-container" id="statsContainer">
+            <div class="stats-header">
+                <div class="stats-title">统计结果</div>
+                <div class="stats-header-right">
+                    <div class="total-info" id="totalInfo"></div>
+                    <button class="copy-btn" id="copyBtn">
+                        <span id="copyIcon">📋</span>
+                        <span id="copyText">复制结果</span>
+                    </button>
+                </div>
+            </div>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">序号</th>
+                        <th>品名</th>
+                        <th style="width: 200px;">总重量</th>
+                        <th style="width: 150px;">记录数</th>
+                    </tr>
+                </thead>
+                <tbody id="statsBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -789,6 +789,7 @@
         }
     })();
 </script>
+
 
 
   </div>
