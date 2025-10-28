@@ -14,7 +14,7 @@
 <meta property="og:description" content=".vege-stat-container * {         margin: 0;         padding: 0;         box-sizing: border-box;     }      .vege-stat-container {         font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-27T03:15:00.000Z">
-<meta property="article:modified_time" content="2025-10-28T08:30:24.440Z">
+<meta property="article:modified_time" content="2025-10-28T08:40:01.046Z">
 <meta property="article:author" content="pray">
 <meta property="article:tag" content="工具">
 <meta property="article:tag" content="Excel">
@@ -222,7 +222,7 @@
     .upload-area {
         border: 2px dashed #cbd5e0;
         border-radius: 12px;
-        padding: 30px 40px;
+        padding: 20px 40px;
         text-align: center;
         background: #f7fafc;
         transition: all 0.3s ease;
@@ -528,6 +528,7 @@
 
         let currentStats = null;
         let currentUnit = '';
+        let currentFileName = '';
 
         uploadArea.addEventListener('click', () => {
             fileInput.click();
@@ -704,6 +705,7 @@
 
             currentStats = statsArray;
             currentUnit = unit;
+            currentFileName = fileName;
 
             statsBody.innerHTML = '';
 
@@ -729,15 +731,45 @@
 
         function copyResultsToClipboard() {
             const grandTotal = currentStats.reduce((sum, item) => sum + item.totalWeight, 0);
+
+            // 从文件名提取时间
+            let dateStr = '';
+            const fileNameWithoutExt = currentFileName.replace(/\.(xlsx|xls)$/i, '');
+            
+            // 尝试匹配常见的日期格式：10-28、2024-10-28、20241028 等
+            const datePatterns = [
+                /(\d{1,2})-(\d{1,2})/,  // 10-28
+                /(\d{4})-(\d{1,2})-(\d{1,2})/,  // 2024-10-28
+                /(\d{4})(\d{2})(\d{2})/,  // 20241028
+                /(\d{1,2})月(\d{1,2})/,  // 10月28
+            ];
+            
+            for (const pattern of datePatterns) {
+                const match = fileNameWithoutExt.match(pattern);
+                if (match) {
+                    if (match.length === 3) {
+                        // 10-28 格式
+                        dateStr = `${match[1]}-${match[2]}`;
+                    } else if (match.length === 4) {
+                        // 2024-10-28 格式
+                        dateStr = `${match[1]}-${match[2]}-${match[3]}`;
+                    }
+                    break;
+                }
+            }
+
             let textFormat = '';
-            textFormat += '🥬 蔬菜统计结果\n';
-            textFormat += '='.repeat(50) + '\n\n';
+            textFormat += '🥬 蔬菜统计结果';
+            if (dateStr) {
+                textFormat += ` (${dateStr})`;
+            }
+            textFormat += '\n';
+            textFormat += '='.repeat(40) + '\n\n';
             textFormat += `共 ${currentStats.length} 个品名，总计 ${grandTotal.toFixed(2)} ${currentUnit}\n\n`;
 
             currentStats.forEach((item, index) => {
-                textFormat += `${(index + 1).toString().padStart(2, ' ')}. ${item.name.padEnd(20, ' ')} `;
-                textFormat += `${item.totalWeight.toFixed(2)} ${currentUnit}`.padEnd(15, ' ');
-                textFormat += `(${item.count} 条)\n`;
+                textFormat += `${(index + 1).toString().padStart(2, ' ')}. ${item.name.padEnd(15, ' ')} `;
+                textFormat += `${item.totalWeight.toFixed(2)}${currentUnit}(${item.count}条)\n`;
             });
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
