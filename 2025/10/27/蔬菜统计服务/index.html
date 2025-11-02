@@ -14,10 +14,10 @@
 <meta property="og:description" content=".vege-stat-container * {         margin: 0;         padding: 0;         box-sizing: border-box;     }      .vege-stat-container {         font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-27T03:15:00.000Z">
-<meta property="article:modified_time" content="2025-10-28T08:40:01.046Z">
+<meta property="article:modified_time" content="2025-11-02T08:24:56.863Z">
 <meta property="article:author" content="pray">
-<meta property="article:tag" content="工具">
 <meta property="article:tag" content="Excel">
+<meta property="article:tag" content="工具">
 <meta property="article:tag" content="数据统计">
 <meta name="twitter:card" content="summary">
     
@@ -58,7 +58,7 @@
     
 	<!-- mathjax -->
 	
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 8.0.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -85,6 +85,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/11/02/hello-world/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/2025/06/26/VsCode%E6%8F%92%E4%BB%B6-git%E5%BF%AB%E9%80%9F%E5%90%88%E5%B9%B6%E5%88%B0%E7%9B%AE%E6%A0%87%E5%88%86%E6%94%AF/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -222,7 +224,7 @@
     .upload-area {
         border: 2px dashed #cbd5e0;
         border-radius: 12px;
-        padding: 20px 40px;
+        padding: 15px 30px;
         text-align: center;
         background: #f7fafc;
         transition: all 0.3s ease;
@@ -270,13 +272,15 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
-        padding-bottom: 15px;
-        border-bottom: 2px solid #e2e8f0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
     }
 
     .stats-title {
         font-size: 24px;
-        color: #2d3748;
+        color: white;
         font-weight: 700;
     }
 
@@ -288,13 +292,17 @@
 
     .total-info {
         font-size: 16px;
-        color: #718096;
+        color: white;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 8px 16px;
+        border-radius: 8px;
     }
 
     .copy-btn {
         background: white;
         color: #667eea;
-        border: 2px solid #667eea;
+        border: 2px solid white;
         padding: 10px 20px;
         border-radius: 8px;
         font-size: 14px;
@@ -307,10 +315,11 @@
     }
 
     .copy-btn:hover {
-        background: #667eea;
+        background: rgba(255, 255, 255, 0.2);
         color: white;
+        border-color: white;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
     }
 
     .copy-btn:active {
@@ -339,13 +348,13 @@
 
     .stats-table th,
     .stats-table td {
-        padding: 16px;
+        padding: 10px 12px;
         text-align: left;
     }
 
     .stats-table th {
         font-weight: 600;
-        font-size: 14px;
+        font-size: 13px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
@@ -367,12 +376,37 @@
 
     .stats-table td {
         color: #4a5568;
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .weight-cell {
         font-weight: 600;
         color: #667eea;
+    }
+
+    .price-input {
+        width: 100%;
+        max-width: 100px;
+        padding: 8px 12px;
+        border: 2px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.2s ease;
+    }
+
+    .price-input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .price-input::placeholder {
+        color: #a0aec0;
+    }
+
+    .amount-cell {
+        font-weight: 600;
+        color: #48bb78;
     }
 
     .error-message {
@@ -498,10 +532,12 @@
             <table class="stats-table">
                 <thead>
                     <tr>
-                        <th style="width: 60px;">序号</th>
-                        <th>品名</th>
-                        <th style="width: 200px;">总重量</th>
-                        <th style="width: 150px;">记录数</th>
+                        <th style="width: 50px;">序号</th>
+                        <th style="width: 200px;">品名</th>
+                        <th style="width: 130px;">总重量</th>
+                        <th style="width: 100px;">记录数</th>
+                        <th style="width: 120px;">单价</th>
+                        <th style="width: 130px;">金额</th>
                     </tr>
                 </thead>
                 <tbody id="statsBody">
@@ -529,6 +565,7 @@
         let currentStats = null;
         let currentUnit = '';
         let currentFileName = '';
+        let priceData = {}; // 存储每个品名的单价
 
         uploadArea.addEventListener('click', () => {
             fileInput.click();
@@ -634,6 +671,7 @@
                 const pinmingIndex = headers.findIndex(h => h && h.toString().includes('品名'));
                 const quantityIndex = headers.findIndex(h => h && (h.toString().includes('购买量') || h.toString().includes('重量')));
                 const unitIndex = headers.findIndex(h => h && h.toString().includes('计量单位'));
+                const priceIndex = headers.findIndex(h => h && h.toString().includes('含税单价'));
 
                 if (pinmingIndex === -1) {
                     throw new Error('未找到"品名"列，请检查Excel文件格式');
@@ -644,6 +682,7 @@
                 }
 
                 const stats = {};
+                const prices = {}; // 存储每个品名的单价
                 let totalRows = 0;
                 let unit = '';
 
@@ -660,6 +699,14 @@
 
                     if (unitIndex !== -1 && !unit && row[unitIndex]) {
                         unit = row[unitIndex].toString();
+                    }
+
+                    // 读取含税单价（优先从Excel获取）
+                    if (priceIndex !== -1 && row[priceIndex] && !prices[pinming]) {
+                        const price = parseFloat(row[priceIndex]);
+                        if (!isNaN(price) && price > 0) {
+                            prices[pinming] = price;
+                        }
                     }
 
                     let numQuantity = parseFloat(quantity);
@@ -684,7 +731,7 @@
                     throw new Error('没有有效的数据行');
                 }
 
-                displayStats(stats, unit, totalRows, fileName);
+                displayStats(stats, unit, totalRows, fileName, prices);
                 showSuccess(`✅ 成功处理 ${totalRows} 条记录！`);
                 showFileInfo(fileName, totalRows);
 
@@ -696,7 +743,7 @@
             }
         }
 
-        function displayStats(stats, unit, totalRows, fileName) {
+        function displayStats(stats, unit, totalRows, fileName, excelPrices = {}) {
             const statsArray = Object.entries(stats).map(([name, data]) => ({
                 name,
                 totalWeight: data.totalWeight,
@@ -706,27 +753,107 @@
             currentStats = statsArray;
             currentUnit = unit;
             currentFileName = fileName;
+            priceData = {}; // 重置价格数据
 
             statsBody.innerHTML = '';
 
             const grandTotal = statsArray.reduce((sum, item) => sum + item.totalWeight, 0);
-            totalInfo.textContent = `共 ${statsArray.length} 个品名，总计 ${grandTotal.toFixed(2)} ${unit}`;
 
             statsArray.forEach((item, index) => {
+                const excelPrice = excelPrices[item.name];
+                const priceValue = excelPrice ? excelPrice.toFixed(2) : '';
+                
+                // 如果Excel中有单价，自动设置到priceData
+                if (excelPrice) {
+                    priceData[item.name] = excelPrice;
+                }
+
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${index + 1}</td>
                     <td><strong>${item.name}</strong></td>
                     <td class="weight-cell">${item.totalWeight.toFixed(2)} ${unit}</td>
                     <td>${item.count} 条</td>
+                    <td>
+                        <input type="number" 
+                               class="price-input" 
+                               placeholder="输入单价" 
+                               step="0.01" 
+                               min="0"
+                               value="${priceValue}"
+                               data-name="${item.name}"
+                               data-weight="${item.totalWeight}">
+                    </td>
+                    <td class="amount-cell" data-name="${item.name}">${excelPrice ? '¥' + (item.totalWeight * excelPrice).toFixed(2) : '--'}</td>
                 `;
                 statsBody.appendChild(row);
+            });
+
+            // 更新总信息
+            updateTotalInfo(grandTotal);
+
+            // 为所有价格输入框添加事件监听
+            document.querySelectorAll('.price-input').forEach(input => {
+                input.addEventListener('input', handlePriceInput);
             });
 
             statsContainer.style.display = 'block';
             setTimeout(() => {
                 statsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }, 100);
+        }
+
+        function handlePriceInput(e) {
+            const input = e.target;
+            const name = input.dataset.name;
+            const weight = parseFloat(input.dataset.weight);
+            const price = parseFloat(input.value);
+            
+            if (price && price > 0) {
+                priceData[name] = price;
+                const amount = weight * price;
+                const amountCell = document.querySelector(`.amount-cell[data-name="${name}"]`);
+                if (amountCell) {
+                    amountCell.textContent = `¥${amount.toFixed(2)}`;
+                }
+            } else {
+                delete priceData[name];
+                const amountCell = document.querySelector(`.amount-cell[data-name="${name}"]`);
+                if (amountCell) {
+                    amountCell.textContent = '--';
+                }
+            }
+            
+            updateTotalAmount();
+        }
+
+        function updateTotalInfo(grandTotal) {
+            const totalAmount = calculateTotalAmount();
+            const amountText = totalAmount !== null ? `，总金额 ¥${totalAmount.toFixed(2)}` : '';
+            totalInfo.textContent = `共 ${currentStats.length} 个品名，总计 ${grandTotal.toFixed(2)} ${currentUnit}${amountText}`;
+        }
+
+        function calculateTotalAmount() {
+            if (Object.keys(priceData).length === 0) return null;
+            
+            // 检查是否所有品名都有单价
+            const allHavePrice = currentStats.every(item => priceData[item.name] !== undefined);
+            if (!allHavePrice) return null;
+            
+            let total = 0;
+            currentStats.forEach(item => {
+                const price = priceData[item.name];
+                if (price) {
+                    total += item.totalWeight * price;
+                }
+            });
+            
+            return total;
+        }
+
+        function updateTotalAmount() {
+            const grandTotal = currentStats.reduce((sum, item) => sum + item.totalWeight, 0);
+            updateTotalInfo(grandTotal);
         }
 
         function copyResultsToClipboard() {
@@ -758,6 +885,8 @@
                 }
             }
 
+            const totalAmount = calculateTotalAmount();
+            
             let textFormat = '';
             textFormat += '🥬 蔬菜统计结果';
             if (dateStr) {
@@ -765,11 +894,23 @@
             }
             textFormat += '\n';
             textFormat += '='.repeat(40) + '\n\n';
-            textFormat += `共 ${currentStats.length} 个品名，总计 ${grandTotal.toFixed(2)} ${currentUnit}\n\n`;
+            textFormat += `共 ${currentStats.length} 个品名，总计 ${grandTotal.toFixed(2)} ${currentUnit}`;
+            if (totalAmount !== null) {
+                textFormat += `，总金额 ¥${totalAmount.toFixed(2)}`;
+            }
+            textFormat += '\n\n';
 
             currentStats.forEach((item, index) => {
+                const price = priceData[item.name];
+                const amount = price ? item.totalWeight * price : null;
+                
                 textFormat += `${(index + 1).toString().padStart(2, ' ')}. ${item.name.padEnd(15, ' ')} `;
-                textFormat += `${item.totalWeight.toFixed(2)}${currentUnit}(${item.count}条)\n`;
+                textFormat += `${item.totalWeight.toFixed(2)}${currentUnit}(${item.count}条)`;
+                
+                if (price) {
+                    textFormat += ` @¥${price.toFixed(2)} = ¥${amount.toFixed(2)}`;
+                }
+                textFormat += '\n';
             });
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
